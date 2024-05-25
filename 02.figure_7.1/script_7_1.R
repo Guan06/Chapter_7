@@ -5,7 +5,7 @@ source("../01.common_scripts/plot_setting.R")
 source("../01.common_scripts/pcoa_function.R")
 source("../01.common_scripts/order.R")
 
-## for figure panel A
+## for figure panel A -> finally changed to panel C
 bc_file <- "../00.data/Bac_ASV_bc.rds"
 design_file <- "../00.data/Bac_design_3809.txt"
 
@@ -15,7 +15,7 @@ dmr <- cmdscale(bc, k = 4, eig = T)
 
 p_a <- pcoa(dmr, design, 12, "Compartment", "Host.Species")
 
-## for figure panel B
+## for figure panel B -> finally changed to panel D
 bc_file <- "../00.data/Fun_ASV_bc.rds"
 design_file <- "../00.data/Fun_design_2232.txt"
 
@@ -25,7 +25,7 @@ dmr <- cmdscale(bc, k = 4, eig = T)
 p_b <- pcoa(dmr, design, 12, "Compartment", "Host.Species")
 p_b <- p_b + theme(legend.position = "none")
 
-## for panel C
+## for panel C -> finally changed to panel A
 alpha_file <- "../00.data/Bac_alpha_mean.txt"
 design_file <- "../00.data/Bac_design_3809.txt"
 
@@ -62,7 +62,7 @@ p_c <- ggplot(alpha_design, aes(x = Group, y = Shannon, color = Compartment,
     theme(legend.position = "none",
           axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 8))
 
-## for figure panel D
+## for figure panel D -> finally changed to panel B
 alpha_file <- "../00.data/Fun_alpha_mean.txt"
 design_file <- "../00.data/Fun_design_2232.txt"
 alpha <- read.table(alpha_file, header = T, sep = "\t")
@@ -95,15 +95,15 @@ p_d <- ggplot(alpha_design, aes(x = Group, y = Shannon, color = Compartment,
 library(cowplot)
 p_a_legend <- get_legend(p_a)
 p_a <- p_a + theme(legend.position = "none")
-upper <- plot_grid(p_a, p_b, p_a_legend, nrow = 1,
-                   labels = c('a', 'b', ''),
+lower <- plot_grid(p_a, p_b, p_a_legend, nrow = 1,
+                   labels = c('c', 'd', ''),
                    rel_widths = c(1, 1, 0.3),
                    rel_heights = c(1, 1, 1))
 
-lower <- plot_grid(p_c, p_d, nrow = 1, labels = c('c', "d"),
+upper <- plot_grid(p_c, p_d, nrow = 1, labels = c('a', "b"),
             rel_widths = c(1.25, 1))
 
 p_aligned <- plot_grid(upper, lower, nrow = 2,
-                       rel_heights = c(2, 1.25),
+                       rel_heights = c(1.25, 2),
                         align = "v", axis = "l")
 ggsave("Figure_7_1.pdf", p_aligned, width = 10)

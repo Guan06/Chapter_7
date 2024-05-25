@@ -71,7 +71,7 @@ p_ab <- plot_grid(p_a, p_b, p_legend, nrow = 1,
                    rel_widths = c(1, 1, 0.3),
                    rel_heights = c(1, 1, 1))
 
-p <- plot_grid(p_ab, p_c, nrow = 1, labels = c('', 'c'),
-               rel_widths = c(1, 0.2))
+# p <- plot_grid(p_ab, p_c, nrow = 1, labels = c('', 'c'),
+#                rel_widths = c(1, 0.2))
 
-ggsave("Figure_S7_3.pdf", p, width = 14, height = 5)
+ggsave("Figure_S7_3.pdf", p_ab, width = 14, height = 5)
